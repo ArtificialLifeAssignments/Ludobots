@@ -24,4 +24,5 @@ def Create_Robot():
     pyrosim.Send_Cube(name="Frontleg", pos=[0.5, 0, -0.5], size=[1, 1, 1])
     pyrosim.End()
 
+
 Create_Robot()
