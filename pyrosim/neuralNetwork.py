@@ -18,10 +18,6 @@ class NEURAL_NETWORK:
 
         f.close()
 
-        print(self.synapses)
-
-        exit()
-
     def Print(self):
 
         self.Print_Sensor_Neuron_Values()
@@ -49,7 +45,8 @@ class NEURAL_NETWORK:
             if self.neurons[neuronName].Is_Sensor_Neuron():
                 self.neurons[neuronName].Update_Sensor_Neuron()
             else:
-                self.neurons[neuronName].Update_Hidden_Or_Motor_Neuron()
+                self.neurons[neuronName].Update_Hidden_Or_Motor_Neuron(self.neurons, self.synapses)
+        
 
 # ---------------- Private methods --------------------------------------
 
