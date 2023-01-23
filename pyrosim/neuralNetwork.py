@@ -18,6 +18,10 @@ class NEURAL_NETWORK:
 
         f.close()
 
+        print(self.synapses)
+
+        exit()
+
     def Print(self):
 
         self.Print_Sensor_Neuron_Values()
