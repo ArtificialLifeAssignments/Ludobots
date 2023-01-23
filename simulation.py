@@ -16,12 +16,12 @@ class SIMULATION:
         self.world = WORLD()
         self.robot = ROBOT()
 
-        
 
     def RUN(self):
         for i in range(c.numberOfIterations):
             p.stepSimulation()
             self.robot.sense(i)
+            self.robot.Think()
             self.robot.Act(i)
             time.sleep(1/60)
         
