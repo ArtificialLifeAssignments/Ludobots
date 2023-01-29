@@ -46,7 +46,7 @@ def Get_Touch_Sensor_Value_For_Link(linkName):
 
     touchValue = -1.0
 
-    print(linkNamesToIndices, linkName)
+    # print(linkNamesToIndices, linkName)
 
     desiredLinkIndex = linkNamesToIndices[linkName]
 

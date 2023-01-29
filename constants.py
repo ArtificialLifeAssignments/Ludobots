@@ -13,3 +13,5 @@ frontLegPhaseOffset = numpy.pi/2
 
 backLegMaxForce = 50
 frontLegMaxForce = 50
+
+numberOfGenerations = 10

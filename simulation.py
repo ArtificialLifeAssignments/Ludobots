@@ -7,9 +7,15 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self):
+    def __init__(self, directOrGUI):
 
-        self.physicsClient = p.connect(p.GUI)
+        if directOrGUI.lower() == "direct":
+            c.numberOfIterations = 100
+            self.physicsClient = p.connect(p.DIRECT)
+        else:
+            c.numberOfIterations = 1000
+            self.physicsClient = p.connect(p.GUI)
+
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8)
 
@@ -24,6 +30,9 @@ class SIMULATION:
             self.robot.Think()
             self.robot.Act(i)
             time.sleep(1/60)
+
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
         
     def __delete__(self):
         p.diconnect()
