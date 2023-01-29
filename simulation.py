@@ -10,10 +10,13 @@ class SIMULATION:
     def __init__(self, directOrGUI):
 
         if directOrGUI.lower() == "direct":
-            c.numberOfIterations = 100
+            self.directOrGUI = 1
+        else:
+            self.directOrGUI = 0
+
+        if self.directOrGUI:
             self.physicsClient = p.connect(p.DIRECT)
         else:
-            c.numberOfIterations = 1000
             self.physicsClient = p.connect(p.GUI)
 
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -29,7 +32,8 @@ class SIMULATION:
             self.robot.sense(i)
             self.robot.Think()
             self.robot.Act(i)
-            time.sleep(1/60)
+            if not self.directOrGUI:
+                time.sleep(1/60)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
