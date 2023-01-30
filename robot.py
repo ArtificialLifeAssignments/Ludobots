@@ -10,17 +10,17 @@ from motor import MOTOR
 class ROBOT:
     def __init__(self, solutionId):
 
+        self.solutionId = solutionId
         self.robotId = p.loadURDF("body.urdf")
         self.motor = {}
         self.sensor = {}
-        self.nn = NEURAL_NETWORK("brain" + str(solutionId) + ".nndf")
+        self.nn = NEURAL_NETWORK("brain" + str(self.solutionId) + ".nndf")
 
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
-        print("I should delete", solutionId)
-        os.system("rm brain" + str(solutionId) + ".nndf")
+        os.system("rm brain" + str(self.solutionId) + ".nndf")
 
     def Prepare_To_Sense(self):
         for linkName in pyrosim.linkNamesToIndices:
@@ -48,12 +48,14 @@ class ROBOT:
     def Get_Fitness(self):
         stateOfLinkZero = p.getLinkState(self.robotId, 0)
         positionOfLinkZero = stateOfLinkZero[0]
-        
-        f = open("fitness.txt", "w")
+
+        f = open("tmp" + str(self.solutionId) + ".txt", "w")
         f.write(str(positionOfLinkZero[0]))
         f.close()
 
-        
+        os.system("mv tmp" + str(self.solutionId) + ".txt fitness" + str(self.solutionId) + ".txt")
+
+         
 
 
 

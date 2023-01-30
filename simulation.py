@@ -2,6 +2,7 @@ import pybullet_data
 import pybullet as p
 import time
 import constants as c
+from solution import SOLUTION
 
 from world import WORLD
 from robot import ROBOT
@@ -37,6 +38,7 @@ class SIMULATION:
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
+        
         
     def __delete__(self):
         p.diconnect()

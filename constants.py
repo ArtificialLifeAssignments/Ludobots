@@ -16,4 +16,4 @@ frontLegMaxForce = 50
 
 numberOfGenerations = 10
 
-populationSize = 2
+populationSize = 10
