@@ -15,7 +15,6 @@ class SOLUTION:
         self.Generate_Brain()
         os.system("python3 simulate.py " + directOrGUI + " " + str(self.myId) +  " 2&>1 &")
 
-
     def Wait_For_Simulation_To_End(self):
         fitnessFileName = "fitness" + str(self.myId) + ".txt"
 
@@ -26,11 +25,6 @@ class SOLUTION:
         self.fitness = float(f.read())
         f.close()
         os.system("rm " + fitnessFileName)
-
-    def Evaluate(self, directOrGUI):
-        pass
-        
-
 
     def Create_World(self):
         x, y, z = -2, 2, 0.1
