@@ -7,7 +7,7 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionId):
 
         if directOrGUI.lower() == "direct":
             self.directOrGUI = 1
@@ -23,7 +23,7 @@ class SIMULATION:
         p.setGravity(0,0,-9.8)
 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionId)
 
 
     def RUN(self):
