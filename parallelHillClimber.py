@@ -18,45 +18,56 @@ class PARALLEL_HILL_CLIMBER:
             self.nextAvailableID += 1
 
     def Evolve(self):
-        for _, parent in self.parents.items():
-            parent.Start_Simulation("DIRECT")
-            
-        for _, parent in self.parents.items():
-            parent.Wait_For_Simulation_To_End()
-        
-
+        self.Evaluate(self.parents)
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
 
 
     def Evolve_For_One_Generation(self):
-        # self.Spawn()
-        # self.Mutate()
-        # self.child.Evaluate("DIRECT")
-        # self.Print()
-        # self.Select()
-        pass
+        self.Spawn()
+        self.Mutate()
+        self.Evaluate(self.children)
+        self.Print()
+        self.Select()
 
     def Spawn(self):
-        self.child = copy.deepcopy(self.parent)
-        self.child.Set_ID(self.nextAvailableID)
-        self.nextAvailableID += 1
+        self.children = {}
+        for id, parent in self.parents.items():
+            self.children[id] = copy.deepcopy(parent)
+            self.children[id].Set_ID(self.nextAvailableID)
+            self.nextAvailableID += 1
 
     def Mutate(self):
-        self.child.Mutate()
+        for _, child in self.children.items():
+            child.Mutate()
         
 
     def Select(self):
-        if self.parent.fitness >= self.child.fitness:
-            self.parent = self.child
+        for id in self.parents.keys():
+            if self.parents[id].fitness >= self.children[id].fitness:
+                self.parents[id] = self.children[id]
 
     def Print(self):
-        # f = open("fitnesses.txt", "a")
-        # f.write("parent - " + str(self.parent.fitness)+ " child - " + str(self.child.fitness))
-        # f.close()
-        print("parent - ", self.parent.fitness, "child - ", self.child.fitness)
+        print("\n")
+        for id, parent in self.parents.items():
+            print("parent - ", parent.fitness, "child - ", self.children[id].fitness)
 
     def Show_Best(self):
-        # self.parent.Evaluate("GUI")
-        pass
+        bestSolution = None
+        for _, parent in self.parents.items():
+            if not bestSolution:
+                bestSolution = parent
+            elif parent.fitness < bestSolution.fitness:
+                bestSolution = parent
+
+        bestSolution.Start_Simulation("GUI")
+
+    def Evaluate(self, solutions):
+        for _, solution in solutions.items():
+                solution.Start_Simulation("DIRECT")
+            
+        for _, solution in solutions.items():
+            solution.Wait_For_Simulation_To_End()
+
+
         
