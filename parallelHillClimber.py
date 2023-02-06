@@ -1,4 +1,5 @@
 from solution import SOLUTION
+from snake import SNAKE
 import constants as c
 import copy
 import os
@@ -16,7 +17,7 @@ class PARALLEL_HILL_CLIMBER:
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.populationSize):
-            self.parents[i] = SOLUTION(self.nextAvailableID)
+            self.parents[i] = SNAKE(self.nextAvailableID)
             self.nextAvailableID += 1
 
     def Evolve(self):

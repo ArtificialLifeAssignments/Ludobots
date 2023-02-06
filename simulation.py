@@ -3,6 +3,7 @@ import pybullet as p
 import time
 import constants as c
 from solution import SOLUTION
+from snake import SNAKE
 import os
 
 

@@ -14,11 +14,21 @@ frontLegPhaseOffset = numpy.pi/2
 backLegMaxForce = 50
 frontLegMaxForce = 50
 
-numberOfGenerations = 1
+numberOfGenerations = 10
 
-populationSize = 1
+populationSize = 10
 
-numSensorNeurons = 9
-numMotorNeurons = 8
+snakeSize = 2
+
+def getJoints(snakeSize):
+
+    if snakeSize+1 == 1:
+        return 4
+    else:
+        return (snakeSize * 6) + 4
+numMotorNeurons = getJoints(snakeSize)
+numSensorNeurons = numMotorNeurons + 1
+
 
 motorJointChange = 0.2
+
