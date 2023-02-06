@@ -14,9 +14,9 @@ frontLegPhaseOffset = numpy.pi/2
 backLegMaxForce = 50
 frontLegMaxForce = 50
 
-numberOfGenerations = 10
+numberOfGenerations = 1
 
-populationSize = 10
+populationSize = 1
 
 numSensorNeurons = 9
 numMotorNeurons = 8

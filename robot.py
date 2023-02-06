@@ -11,7 +11,7 @@ class ROBOT:
     def __init__(self, solutionId):
 
         self.solutionId = solutionId
-        self.robotId = p.loadURDF("body.urdf")
+        self.robotId = p.loadURDF("body" + str(self.solutionId)+ ".urdf")
         self.motor = {}
         self.sensor = {}
         self.nn = NEURAL_NETWORK("brain" + str(self.solutionId) + ".nndf")

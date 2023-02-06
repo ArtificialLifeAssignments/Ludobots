@@ -9,6 +9,8 @@ class PARALLEL_HILL_CLIMBER:
         #Deleting all preexisting temp files
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
+        os.system("rm body*.urdf")
+        os.system("rm world*.sdf")
 
 
         self.parents = {}
@@ -44,7 +46,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for id in self.parents.keys():
-            if self.parents[id].fitness >= self.children[id].fitness:
+            if self.parents[id].fitness > self.children[id].fitness:
                 self.parents[id] = self.children[id]
 
     def Print(self):

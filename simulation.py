@@ -3,12 +3,16 @@ import pybullet as p
 import time
 import constants as c
 from solution import SOLUTION
+import os
+
 
 from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
     def __init__(self, directOrGUI, solutionId):
+
+        self.solutionId = solutionId
 
         if directOrGUI.lower() == "direct":
             self.directOrGUI = 1
@@ -23,7 +27,7 @@ class SIMULATION:
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8)
 
-        self.world = WORLD()
+        self.world = WORLD(solutionId)
         self.robot = ROBOT(solutionId)
 
 

@@ -26,16 +26,18 @@ class SOLUTION:
         self.fitness = float(f.read())
         f.close()
         os.system("rm " + fitnessFileName)
+        os.system("rm body" + str(self.myId) + ".urdf")
+        os.system("rm world" + str(self.myId) + ".sdf")
 
     def Create_World(self):
         x, y, z = -2, 2, 0.1
         length, width, height = 1, 1, 1
-        pyrosim.Start_SDF("world.sdf")
+        pyrosim.Start_SDF("world" + str(self.myId) + ".sdf")
         pyrosim.Send_Cube(name="Box", pos=[x, y, z], size=[length, width, height])
         pyrosim.End()
 
     def Generate_Body(self):
-        pyrosim.Start_URDF("body.urdf")
+        pyrosim.Start_URDF("body" + str(self.myId) + ".urdf")
         pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1], size=[1, 1, 1])
         pyrosim.Send_Joint(name="Torso_Backleg", parent= "Torso",child = "Backleg",
                 type = "revolute", position = [0, -0.5, 1], jointAxis= "1 0 0")
