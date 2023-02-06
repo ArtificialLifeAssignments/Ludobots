@@ -9,7 +9,7 @@ This repository depicts an Ant Crawling through tp the left side of the screen.
  - Ant has multiple mobile body parts thus maintains a variable amount of sensors
  
  ## Video link
-  (Click on this link)[https://youtu.be/lfw3tk1n8Ns]
+  [Click on this link](https://youtu.be/lfw3tk1n8Ns)
   
  ## Fork and Set up Guide
  Fork and download the code from the createre branch. Any version of python `above 3.5` must be present in your system. After replication, using the terminal, navigate to the project folder and run the program using ```python3 search.py```. To modify the config file, navigate to the constants folder and 
