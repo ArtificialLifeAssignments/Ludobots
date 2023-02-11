@@ -1,6 +1,6 @@
 # Randomly Generated Snake
 
-This repository depicts a randomly generated snake with random number of body parts and random number of sensors placed randomly.
+This repository depicts a randomly generated snake with random number of body parts and random number of sensors placed randomly. The links with the sensors are colored green and the rest are colored blue
 ![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/snake/ass6Giphy.gif)
 
 ## Generation diagram
