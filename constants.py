@@ -26,9 +26,16 @@ def getJoints(snakeSize):
         return 4
     else:
         return (snakeSize * 6) + 4
-numMotorNeurons = getJoints(snakeSize)
-numSensorNeurons = numMotorNeurons + 1
+
+numMotorNeurons = 0
+numSensorNeurons = 0
 
 
-motorJointChange = 0.2
+motorJointChange = 0.5
+
+minimumSections = 4
+maximumSections = 10
+
+upperBound = 0.5
+lowerBound = 0.1
 
