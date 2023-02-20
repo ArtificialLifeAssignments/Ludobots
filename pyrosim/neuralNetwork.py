@@ -43,6 +43,7 @@ class NEURAL_NETWORK:
 
     def Update(self):
         for neuronName in self.neurons.keys():
+            print(self.neurons.keys())
             if self.neurons[neuronName].Is_Sensor_Neuron():
                 self.neurons[neuronName].Update_Sensor_Neuron()
             else:

@@ -2,20 +2,28 @@ import pyrosim.pyrosim as pyrosim
 import os, time
 import constants as c
 import random
+from creatureBody import CREATUREBODY
+from cubeSide import CUBESIDE
+from creationStats import CREATIONSTATS
 
 class CREATURE:
     def __init__(self, id, seed=1676127262.929452):
         self.myId = id
-        random.seed(seed)
-        self.Generate_Random_Morphology();
+        # random.seed(time.time)
+        self.seed = seed
 
     def Generate_Random_Morphology(self):
         self.numberOfSections = random.randint(c.minimumSections, c.maximumSections)
-        self.numberOfSensors = random.randint(0, self.numberOfSections)
-
+        self.numberOfSensors = random.randint(self.numberOfSections//3, self.numberOfSections)
         self.sensorPositions = set(random.sample([i for i in range(self.numberOfSections)], self.numberOfSensors))
+        self.numberOfDescendants = random.randint(self.numberOfSections//3, self.numberOfSections)
+        self.canHaveKids = set(random.sample([i for i in range(self.numberOfSections)], self.numberOfDescendants))
+
+        self.creationStatistics = CREATIONSTATS()
+        self.primaryParents = []
 
     def Start_Simulation(self, directOrGUI):
+        self.Generate_Random_Morphology()
         self.Create_World()
         self.Generate_Body()
         self.Generate_Brain()
@@ -42,78 +50,60 @@ class CREATURE:
         length = random.uniform(c.lowerBound, c.upperBound)
         width = random.uniform(c.lowerBound, c.upperBound) 
         height = random.uniform(c.lowerBound, c.upperBound)
-        index = 0
+        self.primarySections = set(random.sample([i+1 for i in range(6)], 3))
+        
         pyrosim.Start_URDF("body" + str(self.myId) + ".urdf")
 
+        pyrosim.Send_Cube(name=str(0), pos=[0, 0, 0.5], size=[length, width, height], c1='<material name="Cyan">',c2='    <color rgba="0 1.0 1.0 1.0"/>')
 
-        if index in self.sensorPositions:
-            pyrosim.Send_Cube(name="Torso"+str(index), pos=[0, 0, 0.5], size=[length, width, height])
-        else:
-            pyrosim.Send_Cube(name="Torso"+str(index), pos=[0, 0, 0.5], size=[length, width, height], c1='<material name="Cyan">',c2='    <color rgba="0 1.0 1.0 1.0"/>')
-
-        index2 = index + 1
-        pyrosim.Send_Joint(name="Torso"+str(index)+"_Torso"+str(index2), parent="Torso"+str(index), child ="Torso"+str(index2),
+        if 1 in self.primarySections:
+            pyrosim.Send_Joint(name="0_1", parent=str(0), child=str(1),
                      type = "revolute", position = [length/2, 0, 0.5], jointAxis= "0 0 1")
+            self.primaryParents.append(CREATUREBODY(1, 0, 0, CUBESIDE.positiveLength, self.sensorPositions, self.canHaveKids, self.creationStatistics))
 
-        for index in range(1, self.numberOfSections):
-            
-            length = random.uniform(c.lowerBound, c.upperBound)
-            width = random.uniform(c.lowerBound, c.upperBound) 
-            height = random.uniform(c.lowerBound, c.upperBound)
-            if index in self.sensorPositions:
-                pyrosim.Send_Cube(name="Torso"+str(index), pos=[length/2, 0, 0], size=[length, width, height])
-            else:
-                pyrosim.Send_Cube(name="Torso"+str(index), pos=[length/2, 0, 0], size=[length, width, height], c1='<material name="Cyan">',c2='    <color rgba="0 1.0 1.0 1.0"/>')
-            index2 = index + 1
-
-            if index != self.numberOfSections-1:
-                pyrosim.Send_Joint(name="Torso"+str(index)+"_Torso"+str(index2), parent="Torso"+str(index), child ="Torso"+str(index2),
-                    type = "revolute", position = [length, 0, 0], jointAxis= "0 0 1")
-
+        if 2 in self.primarySections:
+            pyrosim.Send_Joint(name="0_2", parent=str(0), child=str(2),
+                     type = "revolute", position = [-length/2, 0, 0.5], jointAxis= "0 0 1")
+            self.primaryParents.append(CREATUREBODY(2, 0, 0, CUBESIDE.negativeLength, self.sensorPositions, self.canHaveKids, self.creationStatistics))
+        
+        if 3 in self.primarySections:
+            pyrosim.Send_Joint(name="0_3", parent=str(0), child=str(3),
+                     type = "revolute", position = [0, width/2, 0.5], jointAxis= "0 0 1")
+            self.primaryParents.append(CREATUREBODY(3, 0, 0, CUBESIDE.positiveWidth, self.sensorPositions, self.canHaveKids, self.creationStatistics))
+        
+        if 4 in self.primarySections:
+            pyrosim.Send_Joint(name="0_4", parent=str(0), child=str(4),
+                     type = "revolute", position = [0, -width/2, 0.5], jointAxis= "0 0 1")
+            self.primaryParents.append(CREATUREBODY(4, 0, 0, CUBESIDE.negativeWidth, self.sensorPositions, self.canHaveKids, self.creationStatistics))
+        
+        if 5 in self.primarySections:
+            pyrosim.Send_Joint(name="0_5", parent=str(0), child=str(5),
+                     type = "revolute", position = [0, 0, 0.5+height/2], jointAxis= "0 1 0")
+            self.primaryParents.append(CREATUREBODY(5, 0, 0, CUBESIDE.positiveHeight, self.sensorPositions, self.canHaveKids, self.creationStatistics))
+        
+        if 6 in self.primarySections:
+            pyrosim.Send_Joint(name="0_6", parent=str(0), child=str(6),
+                     type = "revolute", position = [0, 0, 0.5-height/2], jointAxis= "0 1 0")
+            self.primaryParents.append(CREATUREBODY(6, 0, 0, CUBESIDE.negativeHeight, self.sensorPositions, self.canHaveKids, self.creationStatistics))
+                    
         pyrosim.End()
 
     def Generate_Brain(self):
         pyrosim.Start_NeuralNetwork("brain" + str(self.myId) + ".nndf")
 
-        id = 0
-        linkNames = []
-        jointNames = []
+        pyrosim.Send_Sensor_Neuron(name = 0 , linkName =str(0))
+        self.creationStatistics.sensors.append(0)
 
-        for i in range(self.numberOfSections):
-            linkNames.append("Torso"+str(i))
+        for cube in self.primaryParents:
+            cube.generateBrain()
 
-        for i in range(self.numberOfSections-1):
-            l1 = "Torso"+str(i)
-            k = i+1
-            l2 = "_Torso"+str(k)
-            jointNames.append(l1+l2)
-
-        for index, link in enumerate(linkNames):
-            if index in self.sensorPositions:
-                pyrosim.Send_Sensor_Neuron(name = index , linkName = link)
-        
-        id = self.numberOfSections
-        motorId = []
-        for joint in jointNames:
-            pyrosim.Send_Motor_Neuron(name = id , jointName = joint)
-            motorId.append(id)
-            id+=1
-        
-        c.numSensorNeurons = self.numberOfSensors
-        c.numMotorNeurons = self.numberOfSections-1
-
-        for sensor in self.sensorPositions:
-            for motor in motorId:
+        for sensor in self.creationStatistics.sensors:
+            for motor in self.creationStatistics.motorId:
                 pyrosim.Send_Synapse(sourceNeuronName=sensor, targetNeuronName=motor, weight = random.random() * 2 -1)
-    
         pyrosim.End()
 
     def Mutate(self):
         pass
-        # indexRow = np.random.randint(0, c.numSensorNeurons-1)
-        # indexColumn = np.random.randint(0, c.numMotorNeurons-1)
-
-        # self.weights[indexRow][indexColumn] = np.random.random() * 2 -1
 
     def Set_ID(self, id):
         self.myId = id
