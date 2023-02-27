@@ -1,11 +1,14 @@
 from solution import SOLUTION
 from creature import CREATURE
+import random
 import constants as c
 import copy
 import os
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self):
+    def __init__(self, seed):
+        random.seed(seed)
+        self.seed = seed
 
         #Deleting all preexisting temp files
         os.system("rm brain*.nndf")

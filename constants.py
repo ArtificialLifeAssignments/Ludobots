@@ -32,7 +32,7 @@ numSensorNeurons = 0
 
 
 motorJointChange = 0.5
-maxGen = 7
+maxGen = 0
 
 numberOfChildGeneration = 3
 numberOfDescendantsPerGeneration = 3
