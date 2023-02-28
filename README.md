@@ -17,7 +17,7 @@ This repository depicts a randomly generated snake with random number of body pa
 ![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/hw8/Hw1-2.jpg)
 
 ## Fitness results
-![]()
+![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/hw8/Fitnessesofevolvingrobot.png)
 
         
 
