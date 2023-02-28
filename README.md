@@ -4,7 +4,7 @@ This repository depicts a randomly generated snake with random number of body pa
 ![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/snake/ass6Giphy.gif)
 
 ## Generation diagram
-![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/snake/IMG_B374E8D96F93-1.jpeg)
+![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/hw8/Hw1-1%202.jpg)
 ![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/hw8/Hw1-2.jpg)
 
 ## The major features:
