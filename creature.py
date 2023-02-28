@@ -129,12 +129,12 @@ class CREATURE:
 
     def Mutate(self):
 
-        if self.currentGeneration%80 == 0:
+        if self.currentGeneration%15 == 0:
             assert(len(self.addedSecondarySections) == 0)
             assert(len(self.addedTertiarySections) ==  0)
             self.Preprocess_Generate_Body()
 
-        elif self.currentGeneration%80 == 10:
+        elif self.currentGeneration%15 == 2:
             assert(len(self.addedSecondarySections) == 0)
             assert(len(self.addedTertiarySections) ==  0)
             pickedParent = self.primaryParents[random.randint(0, self.numPrimarySections-1)]
@@ -143,7 +143,7 @@ class CREATURE:
             jointDim, jointRev = JOINT.generateJointDimensions(pickedParent, side)
             self.joints[7] = JOINT(pickedParent.id, 7, jointDim, jointRev, self.creationStatistics)
 
-        elif self.currentGeneration%80 == 20:
+        elif self.currentGeneration%15 == 4:
             assert(len(self.addedSecondarySections) == 1)
             assert(len(self.addedTertiarySections) ==  0)
             pickedParent = self.primaryParents[random.randint(0, self.numPrimarySections-1)]
@@ -154,7 +154,7 @@ class CREATURE:
             jointDim, jointRev = JOINT.generateJointDimensions(pickedParent, side)
             self.joints[8] = JOINT(pickedParent.id, 8, jointDim, jointRev, self.creationStatistics)
 
-        elif self.currentGeneration%80 == 30:
+        elif self.currentGeneration%15 == 6:
             assert(len(self.addedSecondarySections) == 2)
             assert(len(self.addedTertiarySections) ==  0)
             pickedParent = self.addedSecondarySections[0]
@@ -163,7 +163,7 @@ class CREATURE:
             jointDim, jointRev = JOINT.generateJointDimensions(pickedParent, side)
             self.joints[9] = JOINT(pickedParent.id, 9, jointDim, jointRev, self.creationStatistics)
 
-        elif self.currentGeneration%80 == 40:
+        elif self.currentGeneration%15 == 8:
             assert(len(self.addedSecondarySections) == 2)
             assert(len(self.addedTertiarySections) ==  1)
             pickedParent = self.addedSecondarySections[1]
@@ -172,7 +172,7 @@ class CREATURE:
             jointDim, jointRev = JOINT.generateJointDimensions(pickedParent, side)
             self.joints[10] = JOINT(pickedParent.id, 10, jointDim, jointRev, self.creationStatistics)
 
-        elif self.currentGeneration%80 == 50:
+        elif self.currentGeneration%15 == 10:
             assert(len(self.addedSecondarySections) == 2)
             assert(len(self.addedTertiarySections) ==  2)
             self.addedSecondarySections.pop(0)
@@ -184,7 +184,7 @@ class CREATURE:
             if 9 in self.creationStatistics.sensors:
                 self.creationStatistics.sensors.remove(9) 
 
-        elif self.currentGeneration%80 == 60:
+        elif self.currentGeneration%15 == 12:
             assert(len(self.addedSecondarySections) == 1)
             assert(len(self.addedTertiarySections) ==  1)
             self.addedTertiarySections.pop()
@@ -192,7 +192,7 @@ class CREATURE:
             if 10 in self.creationStatistics.sensors:
                 self.creationStatistics.sensors.remove(10)
 
-        elif self.currentGeneration%80 == 70:
+        elif self.currentGeneration%15 == 14:
             assert(len(self.addedSecondarySections) == 1)
             assert(len(self.addedTertiarySections) ==  1)
             self.addedSecondarySections.pop()

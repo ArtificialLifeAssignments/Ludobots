@@ -10,7 +10,7 @@ class CREATUREBODY:
         self.sensors = sensors
         self.creationStatistics = creationStatistics
 
-        self.length = random.uniform(c.lowerBound, c.upperBound)
+        self.length = random.uniform(c.lowerBound, c.upperBound )
         self.width = random.uniform(c.lowerBound, c.upperBound) 
         self.height = random.uniform(c.lowerBound, c.upperBound)
 
