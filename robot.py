@@ -6,6 +6,7 @@ import os
 
 from sensor import SENSOR
 from motor import MOTOR
+import math
 
 class ROBOT:
     def __init__(self, solutionId):
@@ -20,7 +21,7 @@ class ROBOT:
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
-        os.system("rm brain" + str(self.solutionId) + ".nndf")
+        # os.system("rm brain" + str(self.solutionId) + ".nndf")
 
     def Prepare_To_Sense(self):
         for linkName in pyrosim.linkNamesToIndices:
@@ -46,15 +47,16 @@ class ROBOT:
         self.nn.Print()
 
     def Get_Fitness(self):
-        # basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
-        # basePosition = basePositionAndOrientation[0]
-        # xPosition = basePosition[0]
-        # stateOfLinkZero = p.getLinkState(self.robotId, 0)
-        # positionOfLinkZero = stateOfLinkZero[0]
+        basePosition, Orientation = p.getBasePositionAndOrientation(self.robotId)
+        xPosition = basePosition[0]
+        yPosition = basePosition[1]
+      
+        fitness = -1 * math.sqrt((xPosition**2) + (yPosition**2))
+
 
 
         f = open("tmp" + str(self.solutionId) + ".txt", "w")
-        # f.write(str(positionOfLinkZero[0]))
+        f.write(str(fitness))
         f.write(str(0))
         f.close()
 

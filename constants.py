@@ -14,9 +14,9 @@ frontLegPhaseOffset = numpy.pi/2
 backLegMaxForce = 50
 frontLegMaxForce = 50
 
-numberOfGenerations = 1
+numberOfGenerations = 500
 
-populationSize = 1
+populationSize = 5
 
 snakeSize = 2
 
@@ -37,8 +37,8 @@ maxGen = 0
 numberOfChildGeneration = 3
 numberOfDescendantsPerGeneration = 3
 
-minimumSections = 20
-maximumSections = 36
+minimumSections = 11
+maximumSections = 13
 
 offsetForMotors = 100
 

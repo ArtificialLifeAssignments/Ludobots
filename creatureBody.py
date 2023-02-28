@@ -10,27 +10,29 @@ class CREATUREBODY:
         self.sensors = sensors
         self.creationStatistics = creationStatistics
 
+        self.length = random.uniform(c.lowerBound, c.upperBound)
+        self.width = random.uniform(c.lowerBound, c.upperBound) 
+        self.height = random.uniform(c.lowerBound, c.upperBound)
+
+        if self.id in self.sensors:
+            self.creationStatistics.sensors.append(self.id)
+
+
     def genBody(self):
 
         thePos, theSize = self.getPositionAndSize()
 
         if self.id in self.sensors:
             pyrosim.Send_Cube(name=str(self.id), pos=thePos, size=theSize)
-            self.creationStatistics.sensors.append(self.id)
         else:
             pyrosim.Send_Cube(name=str(self.id),  pos=thePos, size=theSize, c1='<material name="Cyan">',c2='    <color rgba="0 1.0 1.0 1.0"/>')
             
 
 
     def getPositionAndSize(self):
-
-        length = random.uniform(c.lowerBound, c.upperBound)
-        width = random.uniform(c.lowerBound, c.upperBound) 
-        height = random.uniform(c.lowerBound, c.upperBound)
-
-        self.length = length
-        self.width = width
-        self.height = height
+        length = self.length
+        height = self.height
+        width = self.width
         
         if self.connectorFace == CUBESIDE.positiveLength:
             return [length/2, 0, 0], [length, width, height]

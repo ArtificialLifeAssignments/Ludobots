@@ -2,8 +2,9 @@ from parallelHillClimber import PARALLEL_HILL_CLIMBER
 import os
 import sys
     
-phc = PARALLEL_HILL_CLIMBER(6)
+phc = PARALLEL_HILL_CLIMBER()
 phc.Evolve()
+phc.saveFitnessPlot()
 phc.Show_Best()
     
 
