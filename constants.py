@@ -14,10 +14,6 @@ frontLegPhaseOffset = numpy.pi/2
 backLegMaxForce = 50
 frontLegMaxForce = 50
 
-numberOfGenerations = 500
-
-populationSize = 5
-
 snakeSize = 2
 
 def getJoints(snakeSize):
@@ -44,4 +40,14 @@ offsetForMotors = 100
 
 upperBound = 0.5
 lowerBound = 0.1
+
+
+numberOfGenerations = 500
+populationSize = 10
+numberOfSeedFiles = 10
+fitnessFilePath = "data/fitnesses/"
+fitnessGraphFilePath = "data/fitnessGraphs/"
+initialParentsFilePath = "data/initialParents/"
+bestStateFilePath = "data/bestState/"
+finalParentsFilePath = "data/finalParents/"
 

@@ -1,15 +1,7 @@
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
-import os
-import sys
-    
-phc = PARALLEL_HILL_CLIMBER()
-phc.Evolve()
-phc.saveFitnessPlot()
-phc.Show_Best()
-    
+import constants as c
 
 
-
-# for i in range(2):
-#     os.system("python3 generate.py")
-#     os.system("python3 simulate.py")
+for i in range(2, 10):
+    phc = PARALLEL_HILL_CLIMBER(i+1) # Seed starts from 1 to numberOfSeedFiles
+    phc.Evolve()

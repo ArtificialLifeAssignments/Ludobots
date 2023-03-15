@@ -6,9 +6,10 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+import pickle
 
 class PARALLEL_HILL_CLIMBER:
-    def __init__(self):
+    def __init__(self, seed = 1):
 
         #Deleting all preexisting temp files
         os.system("rm brain*.nndf")
@@ -17,11 +18,12 @@ class PARALLEL_HILL_CLIMBER:
         os.system("rm world*.sdf")
 
         self.initialParents = []
+        self.seed = seed
 
         self.parents = {}
         self.nextAvailableID = 0
         for i in range(c.populationSize):
-            self.parents[i] = CREATURE(self.nextAvailableID, i*1000)
+            self.parents[i] = CREATURE(self.nextAvailableID, (i+1)*seed)
             self.nextAvailableID += 1
 
         self.universalFitness = np.zeros((c.populationSize, c.numberOfGenerations+2))
@@ -36,6 +38,8 @@ class PARALLEL_HILL_CLIMBER:
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
             self.recordCurrentGenerationFitnesses(currentGeneration+1)
+        self.saveFitnessPlot()
+        self.Save_Before_After()
 
     def recordCurrentGenerationFitnesses(self, currentGeneration):
 
@@ -48,8 +52,11 @@ class PARALLEL_HILL_CLIMBER:
         plt.xlabel("Number of generations")
         plt.ylabel("Fitness")
         plt.legend(loc='lower right',ncol=1, fancybox=True, shadow=True)
-        plt.title("Fitnesses Of Evolving Robots")
-        plt.savefig("Fitnessofevolvingrobot")
+        plt.title("Fitnesses Of Evolving Robots with Seed = {}".format(self.seed))
+        plt.savefig("{}FitnessOfEvolvingRobotWithSeed{}.png".format(c.fitnessGraphFilePath, self.seed))
+        plt.close()
+        self.Save(self.universalFitness, "{}universalFitness{}.p".format(c.fitnessFilePath, self.seed))
+
 
 
     def Evolve_For_One_Generation(self):
@@ -82,9 +89,7 @@ class PARALLEL_HILL_CLIMBER:
         for id, parent in self.parents.items():
             print("parent - ", parent.fitness, "child - ", self.children[id].fitness)
 
-    def Show_Best(self):
-
-        self.Show_Before_After()
+    def Get_Best(self):
 
         bestSolution = None
         for _, parent in self.parents.items():
@@ -92,29 +97,28 @@ class PARALLEL_HILL_CLIMBER:
                 bestSolution = parent
             elif parent.fitness < bestSolution.fitness:
                 bestSolution = parent
+        return bestSolution
 
-        bestSolution.Start_Simulation("GUI")
-
-    def Show_Before_After(self):
+    def Save_Before_After(self):
 
         assert(len(self.initialParents) == c.populationSize)
-
-        for parent in self.initialParents:
-            parent.Start_Simulation("GUI")
-            time.sleep(20)
-
-        for parent in self.initialParents:
-            parent.Wait_For_Simulation_To_End()
+        for index, parent in enumerate(self.initialParents):
+            self.Save(parent, "{}seed_{}_initial_parent_{}.p".format(c.initialParentsFilePath, self.seed, index))
 
         all = self.parents.values()
 
-        for parent in all:
-            parent.Start_Simulation("GUI")
-            time.sleep(20)
+        for index, parent in enumerate(all):
+            self.Save(parent, "{}seed_{}_final_state_{}.p".format(c.finalParentsFilePath, self.seed, index))
 
-        for parent in all:
-            parent.Wait_For_Simulation_To_End()
+        self.Save(self.Get_Best(), "{}seed_{}_best_state.p".format(c.bestStateFilePath, self.seed))
 
+
+
+    def Save(self, parent, filename):
+
+        with open(filename, 'wb') as output:
+            pickle.dump(parent, output, pickle.HIGHEST_PROTOCOL)
+        output.close()
 
     def Evaluate(self, solutions):
         for _, solution in solutions.items():
