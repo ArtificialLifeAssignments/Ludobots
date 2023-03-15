@@ -26,7 +26,7 @@ On completion of that analysis, I redid the analysis another 10 times using a di
 Results
 The plotted results supported the hypothesis I wanted to observe. Since I paced every morphological change to coincide with even number generation, at close inspection of the graphs we see that all significant rises in fitness occurred at these points. Further we see the effects of the evolutionary algorithm, Parallel Hill climber. Since its an optimization algorithm that I configured with indirect encoding of genotypes by randomly searching the genotype space for the best fitness, we see that different parents achieve their best fitnesses at different points in evolution. Furthermore there is no single smooth curve of increasing fitness, but rather step increases because the search is not by continuous modification of morphology but by drastic changes.
 
-[Graph1](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/data/fitnessGraphs/FitnessOfEvolvingRobotWithSeed1.png)
+![Graph1](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/data/fitnessGraphs/FitnessOfEvolvingRobotWithSeed1.png)
 
 
 
