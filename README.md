@@ -17,6 +17,8 @@ To be able to unbiasly measure the contribution of physical adaptations against 
 ## Evolution Selection
 Whilst applying the chosen algorithm, I decided to use indirect encoding to specify the evolutionary properties of each species in different generations. This means I followed  Karl Sims sample option to decide genotype encoding based on All vs best withion species fitness comparison. To explain this in code, At the start of the simulation, I generated 10 initial cubes,(parents) each to represent a different species, then regenerated the next ten each based on a lineage from the previous generation. I did this for 500 different generations in each stage modifying the parent morphology(the physical structure) or the brain(the weight from the sensors that trigger the motor neurons incharge of movement). I then comare the generated child to the best species of that generation to be able to pick the next best. 
 
+![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/Screenshot%202023-03-14%20at%2011.08.22%20PM.png)
+
 At each stage of development where morphology was changed, I either, removed a cube that is in the edge together with the corresponding joint, or I added atmost 2 cubes at any random position on the body as described by the visual aid below:
 
 ![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/Hw1-1%202.jpg)
