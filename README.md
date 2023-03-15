@@ -1,6 +1,7 @@
-# Final Project(The engineer) (GoogleDoc Version)[https://docs.google.com/document/d/1YovMU0P1SG-w3hD2WSRHjHradtgLSyhWtqS3UyvEzrk/edit?usp=sharing]
+# Final Project(The engineer) 
+(GoogleDoc Version)[https://docs.google.com/document/d/1YovMU0P1SG-w3hD2WSRHjHradtgLSyhWtqS3UyvEzrk/edit?usp=sharing]
 
-![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/snake/ass6Giphy.gif)
+![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/New%20Project.gif)
 
 Human Intelligence is not the primary reason for the species' evolutionary success. It may have played a significant role; however, physical adaptations were a superior contributor to human survival.This fact, a foundational concept of human evolution, can be easily studied through the latest developments in Artificial Intellegince and its intersectection with bioengineering through the field called Artificial Life. 
 
@@ -17,6 +18,10 @@ To be able to unbiasly measure the contribution of physical adaptations against 
 Whilst applying the chosen algorithm, I decided to use indirect encoding to specify the evolutionary properties of each species in different generations. This means I followed  Karl Sims sample option to decide genotype encoding based on All vs best withion species fitness comparison. To explain this in code, At the start of the simulation, I generated 10 initial cubes,(parents) each to represent a different species, then regenerated the next ten each based on a lineage from the previous generation. I did this for 500 different generations in each stage modifying the parent morphology(the physical structure) or the brain(the weight from the sensors that trigger the motor neurons incharge of movement). I then comare the generated child to the best species of that generation to be able to pick the next best. 
 
 At each stage of development where morphology was changed, I either, removed a cube that is in the edge together with the corresponding joint, or I added atmost 2 cubes at any random position on the body as described by the visual aid below:
+
+![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/Hw1-1%202.jpg)
+![](https://github.com/ArtificialLifeAssignments/Ludobots/blob/final/Hw1-2.jpg)
+
 
 
 On completion of that analysis, I redid the analysis another 10 times using a different random seed for each of the ten times. I then graphed the changes in the fitnesses of the best organism for each seed, producing ten graphs showing the results of each run. I also saved pickles of the 10 final best species state of each seed run in the data folder and further the pickle of the best species overall for each seed run.  I also pickled the initial 10 species parent of each random seed run. All of these pickled data can be viewed in the simulator by running the playSavedPickles module, that takes in a random seed from 1 - 10, and plays all the 10 initial parents in the simulator, then the final best 10 each corresponding to the fittest result of each species after 500 generation, then finally it plays the very best species of all the final 10. 
