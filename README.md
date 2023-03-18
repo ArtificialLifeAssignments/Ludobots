@@ -45,7 +45,7 @@ The plotted results supported the hypothesis I wanted to observe. Since I paced 
 
 
  ## Video link
-  ![Click on this link](https://www.youtube.com/watch?v=l55aWs4c1nY&list=PLCGVHiz7oVMdL6_8B75XG6X2Wnk9bqsk1&index=18)
+  [Click on this link](https://www.youtube.com/watch?v=l55aWs4c1nY&list=PLCGVHiz7oVMdL6_8B75XG6X2Wnk9bqsk1&index=18)
   
  ## Fork and Set up Guide
  - Fork and download the code from the createre branch. Any version of python `above 3.5` must be present in your system. After replication, using the terminal, navigate to the project folder and run the program using ```python3 search.py```. To modify the config file, navigate to the constants folder and 
